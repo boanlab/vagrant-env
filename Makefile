@@ -1,31 +1,31 @@
-.PHONY: vagrant-check
-vagrant-check:
+.PHONY: check
+check:
 ifeq ($(LOGNAME), vagrant)
 	$(error rule must be called from outside the vagrant environment)
 endif
 
-.PHONY: vagrant-up
-vagrant-up: vagrant-check
+.PHONY: up
+up: check
 	vagrant up; true
 
-.PHONY: vagrant-status
-vagrant-status: vagrant-check
+.PHONY: status
+status: check
 	vagrant status; true
 
-.PHONY: vagrant-reload
-vagrant-reload: vagrant-check
+.PHONY: reload
+reload: check
 	vagrant reload; true
 
-.PHONY: vagrant-ssh
-vagrant-ssh: vagrant-check
+.PHONY: ssh
+ssh: check
 	vagrant ssh; true
 
-.PHONY: vagrant-halt
-vagrant-halt: vagrant-check
+.PHONY: halt
+halt: check
 	vagrant halt; true
 
-.PHONY: vagrant-destroy
-vagrant-destroy: vagrant-check
+.PHONY: destroy
+destroy: check
 	vagrant destroy; true
 
 .PHONY: clean

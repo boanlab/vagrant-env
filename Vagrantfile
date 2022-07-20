@@ -7,14 +7,15 @@ if ENV['OS'] == "centos" then
   else
     VM_IMG = "bento/centos-8"
     VM_NAME = "vagrant-env-c8"
+  end
 else # ubuntu
   if ENV['VERSION'] == "22.04" then
     VM_IMG = "ubuntu/jammy64" # 5.15
     VM_NAME = "vagrant-env-jammy"
-  elif ENV['VERSION'] == "21.10" then
+  elsif ENV['VERSION'] == "21.10" then
     VM_IMG = "ubuntu/impish64" # 5.13
     VM_NAME = "vagrant-env-impish"
-  elif ENV['VERSION'] == "20.04" then
+  elsif ENV['VERSION'] == "20.04" then
     VM_IMG = "ubuntu/focal64" # 5.4
     VM_NAME = "vagrant-env-focal"
   else
