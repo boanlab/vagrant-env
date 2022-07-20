@@ -15,8 +15,8 @@ make clean   = rm -f *.log
 - OS and Version
 
 ```
-make up OS=ubuntu VERSION={18.04,20.04,21.10,22.04}
-make up OS=centos VERSION={8,9}
+make {up,destroy} OS=ubuntu VERSION={18.04,20.04,21.10,22.04}
+make {up,destroy} OS=centos VERSION={8,9}
 ```
 
 - Default values

@@ -65,9 +65,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
   config.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
 
-  # copy git config
-  config.vm.provision :file, source: "~/.gitconfig", destination: "$HOME/.gitconfig"
-
   if ENV['OS'] == "centos" then
     if ENV['VERSION'] == "9" then
       config.vm.provision :shell, :inline => "sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"lsm=apparmor,bpf\"/g' /etc/default/grub"
