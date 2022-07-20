@@ -15,8 +15,16 @@ make clean           = rm -f *.log
 - OS and Version
 
 ```
-make vagrant-up OS=ubuntu VERSION={18.04,20.04,21.10,22.04}
+make vagrant-up OS=ubuntu VERSION={bionic,focal,impish,jammy}
 make vagrant-up OS=centos VERSION={8,9}
+make vagrant-up OS=rhel   VERSION={8,9}
+```
+
+```
+Ubuntu 18.04 = bionic
+Ubuntu 20.04 = focal
+Ubuntu 21.10 = impish
+Ubuntu 22.04 = jammy
 ```
 
 - Default values
@@ -25,9 +33,12 @@ make vagrant-up OS=centos VERSION={8,9}
 if OS=centos then
   VERSION=8 by default
 
+else if OS=rhel then
+  VERSION=8 by default
+
 else if OS=ubuntu then
-  VERSION=18.04 by default
+  VERSION=bionic by default
 
 else
-  OS=ubuntu VERSION=18.04 by default
+  OS=ubuntu VERSION=bionic by default
 ```

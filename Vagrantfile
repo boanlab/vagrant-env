@@ -2,24 +2,32 @@ Vagrant.require_version ">= 2.0.0"
 
 if ENV['OS'] == "centos" then
   if ENV['VERSION'] == "9" then
-    VM_IMG = "bento/centos-9"
-    VM_NAME = "vagrant-env-c9"
+    VM_IMG = "generic/centos9s"
+    VM_NAME = "vagrant-env-centos9s"
   else
-    VM_IMG = "bento/centos-8"
-    VM_NAME = "vagrant-env-c8"
+    VM_IMG = "generic/centos8s"
+    VM_NAME = "vagrant-env-centos8s"
+  end
+elsif ENV['OS'] == "rhel" then
+  if ENV['VERSION'] == "9" then
+    VM_IMG = "generic/rhel9"
+    VM_NAME = "vagrant-env-rhel9"
+  else
+    VM_IMG = "generic/rhel8"
+    VM_NAME = "vagrant-env-rhel8"
   end
 else # ubuntu
-  if ENV['VERSION'] == "22.04" then
-    VM_IMG = "ubuntu/jammy64" # 5.15
+  if ENV['VERSION'] == "jammy" then
+    VM_IMG = "generic/ubuntu2204" # 5.15
     VM_NAME = "vagrant-env-jammy"
-  elsif ENV['VERSION'] == "21.10" then
-    VM_IMG = "ubuntu/impish64" # 5.13
+  elsif ENV['VERSION'] == "impish" then
+    VM_IMG = "generic/ubuntu2110" # 5.13
     VM_NAME = "vagrant-env-impish"
-  elsif ENV['VERSION'] == "20.04" then
-    VM_IMG = "ubuntu/focal64" # 5.4
+  elsif ENV['VERSION'] == "focal" then
+    VM_IMG = "generic/ubuntu2004" # 5.4
     VM_NAME = "vagrant-env-focal"
   else
-    VM_IMG = "ubuntu/bionic64" # 4.15
+    VM_IMG = "generic/ubuntu1804" # 4.15
     VM_NAME = "vagrant-env-bionic"
   end
 end
@@ -74,8 +82,17 @@ Vagrant.configure("2") do |config|
 
     # do something
 
+  elsif ENV['OS'] == "rhel" then
+    if ENV['VERSION'] == "9" then
+      config.vm.provision :shell, :inline => "sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"lsm=apparmor,bpf\"/g' /etc/default/grub"
+      config.vm.provision :shell, :inline => "grub-mkconfig -o /boot/grub/grub.cfg"
+      config.vm.provision :reload
+    end
+
+    # do something
+
   else # ubuntu
-    if ENV['VERSION'] == "22.04" || ENV['VERSION'] == "21.10" then
+    if ENV['VERSION'] == "jammy" || ENV['VERSION'] == "impish" then
       config.vm.provision :shell, :inline => "sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"lsm=apparmor,bpf\"/g' /etc/default/grub"
       config.vm.provision :shell, :inline => "update-grub"
       config.vm.provision :reload
