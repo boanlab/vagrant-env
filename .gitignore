@@ -1,2 +1,5 @@
+# vagrant files
 .vagrant
+
+# vagrant log
 *.log

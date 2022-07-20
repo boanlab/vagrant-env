@@ -3,25 +3,31 @@
 - Commands
 
 ```
-make up      = vagrant up
-make status  = vagrant status
-make reload  = vagrant reload
-make ssh     = vagrant ssh
-make halt    = vagrant halt
-make destroy = vagrant destroy
-make clean   = rm -f *.log
+make vagrant-up      = vagrant up
+make vagrant-status  = vagrant status
+make vagrant-reload  = vagrant reload
+make vagrant-ssh     = vagrant ssh
+make vagrant-halt    = vagrant halt
+make vagrant-destroy = vagrant destroy
+make clean           = rm -f *.log
 ```
 
 - OS and Version
 
 ```
-make {up,destroy} OS=ubuntu VERSION={18.04,20.04,21.10,22.04}
-make {up,destroy} OS=centos VERSION={8,9}
+make {...} OS=ubuntu VERSION={18.04,20.04,21.10,22.04}
+make {...} OS=centos VERSION={8,9}
 ```
 
 - Default values
 
 ```
-If OS=centos, VERSION=8 by default
-Otherwise, OS=ubuntu VERSION=18.04 by default
+if OS=centos then
+  VERSION=8 by default
+
+if OS=ubuntu then
+  VERSION=18.04 by default
+
+Otherwise
+  OS=ubuntu VERSION=18.04 by default
 ```

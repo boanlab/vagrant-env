@@ -1,32 +1,37 @@
-.PHONY: check
-check:
+include .env
+
+.PHONY: vagrant-check
+vagrant-check:
 ifeq ($(LOGNAME), vagrant)
 	$(error rule must be called from outside the vagrant environment)
 endif
 
-.PHONY: up
-up: check
-	vagrant up; true
+.PHONY: vagrant-up
+vagrant-up: vagrant-check
+	@echo "OS=${OS}" > .env
+	@echo "VERSION=${VERSION}" >> .env
+	OS=${OS} VERSION=${VERSION} vagrant up; true
 
-.PHONY: status
-status: check
-	vagrant status; true
+.PHONY: vagrant-status
+vagrant-status: vagrant-check
+	OS=${OS} VERSION=${VERSION} vagrant status; true
 
-.PHONY: reload
-reload: check
-	vagrant reload; true
+.PHONY: vagrant-reload
+vagrant-reload: vagrant-check
+	OS=${OS} VERSION=${VERSION} vagrant reload; true
 
-.PHONY: ssh
-ssh: check
-	vagrant ssh; true
+.PHONY: vagrant-ssh
+vagrant-ssh: vagrant-check
+	OS=${OS} VERSION=${VERSION} vagrant ssh; true
 
-.PHONY: halt
-halt: check
-	vagrant halt; true
+.PHONY: vagrant-halt
+vagrant-halt: vagrant-check
+	OS=${OS} VERSION=${VERSION} vagrant halt; true
 
-.PHONY: destroy
-destroy: check
-	vagrant destroy; true
+.PHONY: vagrant-destroy
+vagrant-destroy: vagrant-check
+	@echo > .env
+	OS=${OS} VERSION=${VERSION} vagrant destroy; true
 
 .PHONY: clean
 clean:
