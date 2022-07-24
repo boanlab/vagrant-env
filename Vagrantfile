@@ -1,34 +1,45 @@
 Vagrant.require_version ">= 2.0.0"
 
+ENV_NAME = ENV['PREFIX'] || "vagrant-env"
+
 if ENV['OS'] == "centos" then
   if ENV['VERSION'] == "9" then
     VM_IMG = "generic/centos9s"
-    VM_NAME = "vagrant-env-centos9s"
+    VM_NAME = ENV_NAME + "-centos9s"
+  elsif ENV['VERSION'] == "8" then
+    VM_IMG = "generic/centos8s"
+    VM_NAME = ENV_NAME + "-centos8s"
   else
     VM_IMG = "generic/centos8s"
-    VM_NAME = "vagrant-env-centos8s"
+    VM_NAME = ENV_NAME + "-centos8s"
   end
 elsif ENV['OS'] == "rhel" then
   if ENV['VERSION'] == "9" then
     VM_IMG = "generic/rhel9"
-    VM_NAME = "vagrant-env-rhel9"
+    VM_NAME = ENV_NAME + "-rhel9"
+  elsif ENV['VERSION'] == "8" then
+    VM_IMG = "generic/rhel8"
+    VM_NAME = ENV_NAME + "-rhel8"
   else
     VM_IMG = "generic/rhel8"
-    VM_NAME = "vagrant-env-rhel8"
+    VM_NAME = ENV_NAME + "-rhel8"
   end
 else # ubuntu
   if ENV['VERSION'] == "jammy" then
     VM_IMG = "generic/ubuntu2204" # 5.15
-    VM_NAME = "vagrant-env-jammy"
+    VM_NAME = ENV_NAME + "-jammy"
   elsif ENV['VERSION'] == "impish" then
     VM_IMG = "generic/ubuntu2110" # 5.13
-    VM_NAME = "vagrant-env-impish"
+    VM_NAME = ENV_NAME + "-impish"
   elsif ENV['VERSION'] == "focal" then
     VM_IMG = "generic/ubuntu2004" # 5.4
-    VM_NAME = "vagrant-env-focal"
+    VM_NAME = ENV_NAME + "-focal"
+  elsif ENV['VERSION'] == "bionic" then
+    VM_IMG = "generic/ubuntu1804"
+    VM_NAME = ENV_NAME + "-bionic"
   else
     VM_IMG = "generic/ubuntu1804" # 4.15
-    VM_NAME = "vagrant-env-bionic"
+    VM_NAME = ENV_NAME + "-bionic"
   end
 end
 
