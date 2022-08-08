@@ -4,14 +4,19 @@ VERSION=1.22
 
 . /etc/os-release
 
+if [ "$VERSION_ID" == "18.04" ]; then
+    OS=xUbuntu_18.04
+else # 20.04, 22.04
+    OS=xUbuntu_20.04
+fi
+
 # get signing keys
-echo "deb [signed-by=/usr/share/keyrings/libcontainers-archive-keyring.gpg] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/x$NAME_$VERSION_ID/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-echo "deb [signed-by=/usr/share/keyrings/libcontainers-crio-archive-keyring.gpg] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/x$NAME_$VERSION_ID/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
+echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$CRIO_VERSION/$OS/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION.list
 
 # add repositories
-sudo mkdir -p /usr/share/keyrings
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/x$NAME_$VERSION_ID/Release.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/libcontainers-archive-keyring.gpg
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/x$NAME_$VERSION_ID/Release.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/libcontainers-crio-archive-keyring.gpg
+curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION/$OS/Release.key | sudo apt-key add -
+curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/Release.key | sudo apt-key add -
 
 # install
 sudo apt-get update
