@@ -5,21 +5,6 @@ if [ "$CNI" == "" ]; then
     CNI=cilium
 fi
 
-# use docker as default CRI
-if [ "$CRI_SOCKET" == "" ]; then
-    if [ -S /var/run/docker.sock ]; then
-        CRI_SOCKET=unix:///var/run/docker.sock
-    elif [ -S /var/run/crio/crio.sock ]; then
-        CRI_SOCKET=unix:///var/run/crio/crio.sock
-    elif [ -S /var/run/containerd/containerd.sock ]; then
-        CRI_SOCKET=unix:///run/containerd/containerd.sock
-    fi
-fi
-
-if [ "$CRI_SOCKET" != "" ]; then
-    CRI_SOCKET="--cri-socket=$CRI_SOCKET"
-fi
-
 # check supported CNI
 if [ "$CNI" != "flannel" ] && [ "$CNI" != "weave" ] && [ "$CNI" != "calico" ] && [ "$CNI" != "cilium" ]; then
     echo "Usage: CNI={flannel|weave|calico|cilium} CRI_SOCKET=unix:///path/to/socket_file MASTER={true|false} $0"
@@ -41,9 +26,9 @@ exit 0
 
 # initialize the master node
 if [ "$CNI" == "calico" ]; then
-    sudo kubeadm init $CRI_SOCKET --pod-network-cidr=192.168.0.0/16 | tee -a ~/k8s_init.log
+    sudo kubeadm init --pod-network-cidr=192.168.0.0/16 | tee -a ~/k8s_init.log
 else # weave, flannel, cilium
-    sudo kubeadm init $CRI_SOCKET --pod-network-cidr=10.244.0.0/16 | tee -a ~/k8s_init.log
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 | tee -a ~/k8s_init.log
 fi
 
 # make kubectl work for non-root user
