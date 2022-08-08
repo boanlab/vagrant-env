@@ -15,7 +15,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-# update the Docker repo
+# update the docker repo
 sudo apt-get update
 
 # make sure we install Docker from the Docker repo
@@ -44,8 +44,10 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 
-# start Docker
+# start docker
+sudo systemctl enable docker
 sudo systemctl restart docker
+
 sleep 1
 
 # add user to docker

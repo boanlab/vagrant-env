@@ -12,7 +12,7 @@ if [ "$CRI_SOCKET" == "" ]; then
     elif [ -S /var/run/crio/crio.sock ]; then
         CRI_SOCKET=unix:///var/run/crio/crio.sock
     elif [ -S /var/run/containerd/containerd.sock ]; then
-        CRI_SOCKET=unix:///var/run/containerd/containerd.sock
+        CRI_SOCKET=unix:///run/containerd/containerd.sock
     fi
 fi
 
@@ -37,6 +37,8 @@ sudo mkdir -p /var/lib/etcd/
 sudo mkdir -p /etc/kubernetes/pki/
 sudo chcon -R -t svirt_sandbox_file_t /var/lib/etcd
 sudo chcon -R -t svirt_sandbox_file_t /etc/kubernetes/
+
+exit 0
 
 # initialize the master node
 if [ "$CNI" == "calico" ]; then

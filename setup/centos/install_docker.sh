@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DOCKER_INSTALL=`dirname $(realpath "$0")`
-
 # remove podman
 sudo yum remove -y buildah skopeo podman containers-common atomic-registries docker container-tools
 
@@ -12,7 +10,7 @@ cd ~ && rm -rf /.local/share/containers/
 # disable selinux
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-# setup the repo
+# setup docker repo
 sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
@@ -33,9 +31,9 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 
-# run docker
+# start docker
 sudo systemctl enable docker
 sudo systemctl restart docker
 
-# change mode
+# allow non-root user to access docker.sock
 sudo chmod 666 /var/run/docker.sock

@@ -12,7 +12,7 @@ if [ "$CRI_SOCKET" == "" ]; then
     elif [ -S /var/run/crio/crio.sock ]; then
         CRI_SOCKET=unix:///var/run/crio/crio.sock
     elif [ -S /var/run/containerd/containerd.sock ]; then
-        CRI_SOCKET=unix:///var/run/containerd/containerd.sock
+        CRI_SOCKET=unix:///run/containerd/containerd.sock
     fi
 fi
 
@@ -36,6 +36,8 @@ sudo swapoff -a
 sudo modprobe br_netfilter
 sudo bash -c "echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables"
 sudo bash -c "echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.conf"
+
+exit 0
 
 # initialize the master node
 if [ "$CNI" == "calico" ]; then

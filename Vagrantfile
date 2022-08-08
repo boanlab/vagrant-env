@@ -143,7 +143,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision :shell, :inline => "/home/vagrant/setup/centos/install_crio.sh"
     elsif RUNTIME == "containerd" then
       # install containerd
-      puts "Skip to install containerd"
+      config.vm.provision :shell, :inline => "/home/vagrant/setup/centos/install_containerd.sh"
     end
 
     if K8S == "k3s" then
