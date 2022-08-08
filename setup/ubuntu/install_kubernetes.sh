@@ -28,9 +28,6 @@ sudo apt-mark hold kubeadm kubelet kubectl
 # mount bpffs (for cilium)
 echo "bpffs                                     /sys/fs/bpf     bpf     defaults          0       0" | sudo tee -a /etc/fstab
 
-# install apparmor
-sudo apt-get install -y apparmor apparmor-utils
-
 # enable ip forwarding
 if [ $(cat /proc/sys/net/ipv4/ip_forward) == 0 ]; then
     sudo bash -c "echo '1' > /proc/sys/net/ipv4/ip_forward"
@@ -40,3 +37,6 @@ fi
 # disable rp_filter
 sudo bash -c "echo 'net.ipv4.conf.all.rp_filter = 0' > /etc/sysctl.d/99-override_cilium_rp_filter.conf"
 sudo systemctl restart systemd-sysctl
+
+# install apparmor
+sudo apt-get install -y apparmor apparmor-utils

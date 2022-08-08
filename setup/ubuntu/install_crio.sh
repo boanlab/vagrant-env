@@ -1,13 +1,12 @@
 #!/bin/bash
 
-VERSION=1.22
-
 . /etc/os-release
+
+VERSION=1.22
+OS=xUbuntu_20.04
 
 if [ "$VERSION_ID" == "18.04" ]; then
     OS=xUbuntu_18.04
-else
-    OS=xUbuntu_20.04
 fi
 
 # get signing keys
