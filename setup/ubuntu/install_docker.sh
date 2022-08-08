@@ -51,13 +51,13 @@ sudo systemctl restart docker
 sleep 1
 
 # add user to docker
-if [[ "$(id -u -n)" = "vagrant" ]]; then
+if [[ -d /home/vagrant ]]; then
     sudo usermod -aG docker vagrant
 else
     sudo usermod -aG docker $USER
 fi
 
-# bypass to run docker command
+# allow non-root user to access docker.sock
 sudo chmod 666 /var/run/docker.sock
 
 # install docker-compose

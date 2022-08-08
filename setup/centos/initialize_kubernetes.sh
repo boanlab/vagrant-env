@@ -33,7 +33,7 @@ fi
 sleep 15
 
 # make kubectl work for non-root user
-if [[ "$(id -u -n)" == "vagrant" ]]; then
+if [[ -d /home/vagrant ]]; then
     mkdir -p /home/vagrant/.kube
     sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
     sudo chown vagrant:vagrant /home/vagrant/.kube/config

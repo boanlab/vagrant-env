@@ -28,7 +28,7 @@ else # containerd by default
   [[ $? != 0 ]] && echo "Failed to install k3s" && exit 1
 fi
 
-if [[ $(id -u -n) == "vagrant" ]]; then
+if [[ -d /home/vagrant ]]; then
     mkdir -p /home/vagrant/.kube
     sudo cp /etc/rancher/k3s/k3s.yaml /home/vagrant/.kube/config
     sudo chown -R vagrant:vagrant /home/vagrant/.kube
