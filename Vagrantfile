@@ -151,7 +151,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision :shell, :inline => "/home/vagrant/setup/k3s/install_k3s.sh"
     elsif K8S == "kubeadm" then
       # install kubernetes
-      config.vm.provision :shell, :inline => "/home/vagrant/setup/centos/install_kubernetes.sh"
+      config.vm.provision :shell, :inline => "RUNTIME=" + RUNTIME + " /home/vagrant/setup/centos/install_kubernetes.sh"
 
       # initialize kubernetes
       config.vm.provision :shell, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/centos/initialize_kubernetes.sh"
@@ -194,7 +194,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision :shell, :inline => "/home/vagrant/setup/k3s/install_k3s.sh"
     elsif K8S == "kubeadm" then
       # install Kubernetes
-      config.vm.provision :shell, :inline => "/home/vagrant/setup/ubuntu/install_kubernetes.sh"
+      config.vm.provision :shell, :inline => "RUNTIME=" + RUNTIME + " /home/vagrant/setup/ubuntu/install_kubernetes.sh"
 
       # initialize kubernetes
       config.vm.provision :shell, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/ubuntu/initialize_kubernetes.sh"
