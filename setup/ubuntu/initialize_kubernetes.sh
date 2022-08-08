@@ -8,7 +8,7 @@ fi
 # use docker as default CRI
 if [ "$CRI_SOCKET" == "" ]; then
     if [ -S /var/run/docker.sock ]; then
-        CRI_SOCKET="" # let kubeadm figure it out
+        CRI_SOCKET=unix:///var/run/docker.sock
     elif [ -S /var/run/crio/crio.sock ]; then
         CRI_SOCKET=unix:///var/run/crio/crio.sock
     elif [ -S /var/run/containerd/containerd.sock ]; then

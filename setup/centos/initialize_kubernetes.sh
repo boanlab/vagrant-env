@@ -8,7 +8,7 @@ fi
 # use docker as default CRI
 if [ "$CRI_SOCKET" == "" ]; then
     if [ -S /var/run/docker.sock ]; then
-        CRI_SOCKET="" # let kubeadm figure it out
+        CRI_SOCKET=unix:///var/run/docker.sock
     elif [ -S /var/run/crio/crio.sock ]; then
         CRI_SOCKET=unix:///var/run/crio/crio.sock
     elif [ -S /var/run/containerd/containerd.sock ]; then
@@ -17,7 +17,7 @@ if [ "$CRI_SOCKET" == "" ]; then
 fi
 
 if [ "$CRI_SOCKET" != "" ]; then
-    CRI_SOCKET="--cri-socket=$CRI_SOCKET_PATH"
+    CRI_SOCKET="--cri-socket=$CRI_SOCKET"
 fi
 
 # check supported CNI
