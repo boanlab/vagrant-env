@@ -22,7 +22,7 @@ else # docker
     sudo apt-get install -y kubeadm=1.23.0-00 kubelet=1.23.0-00 kubectl=1.23.0-00
 fi
 
-# exclude kubernetes packages from updates
+# exclude kubernetes packages from apt-update
 sudo apt-mark hold kubeadm kubelet kubectl
 
 # mount bpffs (for cilium)

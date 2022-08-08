@@ -154,7 +154,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision :shell, :inline => "RUNTIME=" + RUNTIME + " /home/vagrant/setup/centos/install_kubernetes.sh"
 
       # initialize kubernetes
-      config.vm.provision :shell, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/centos/initialize_kubernetes.sh"
+      config.vm.provision :shell, privileged: false, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/centos/initialize_kubernetes.sh"
     end
 
     # enable selinux
@@ -197,7 +197,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision :shell, :inline => "RUNTIME=" + RUNTIME + " /home/vagrant/setup/ubuntu/install_kubernetes.sh"
 
       # initialize kubernetes
-      config.vm.provision :shell, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/ubuntu/initialize_kubernetes.sh"
+      config.vm.provision :shell, privileged: false, :inline => "CNI=flannel MASTER=true /home/vagrant/setup/ubuntu/initialize_kubernetes.sh"
     end
 
     # do something

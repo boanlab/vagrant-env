@@ -11,7 +11,7 @@ sudo swapoff -a && sudo sysctl -w vm.swappiness=0
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 
-# update iptables settings
+# enable iptables
 echo "net.bridge.bridge-nf-call-ip6tables = 1" | sudo tee /etc/sysctl.d/k8s.conf
 echo "net.bridge.bridge-nf-call-iptables = 1" | sudo tee -a /etc/sysctl.d/k8s.conf
 sudo sysctl --system

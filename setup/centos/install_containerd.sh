@@ -17,6 +17,9 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/dock
 # install containerd
 sudo dnf -y install containerd.io
 
+# remove disabled_plugins = ["cri"]
+sudo rm /etc/containerd/config.toml
+
 # start containerd
 sudo systemctl enable containerd
 sudo systemctl restart containerd

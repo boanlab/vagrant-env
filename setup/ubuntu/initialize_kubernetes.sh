@@ -29,6 +29,8 @@ else # weave, flannel, cilium
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16 | tee -a ~/k8s_init.log
 fi
 
+sleep 15
+
 # make kubectl work for non-root user
 if [[ -d /home/vagrant ]]; then
     mkdir -p /home/vagrant/.kube
