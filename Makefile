@@ -10,28 +10,30 @@ endif
 vagrant-up: vagrant-check
 	@echo "OS=${OS}" > .env
 	@echo "VERSION=${VERSION}" >> .env
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant up; true
+	@echo "K8S=${K8S}" >> .env
+	@echo "RUNTIME=${RUNTIME}" >> .env
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant up; true
 
 .PHONY: vagrant-status
 vagrant-status: vagrant-check
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant status; true
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant status; true
 
 .PHONY: vagrant-reload
 vagrant-reload: vagrant-check
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant reload; true
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant reload; true
 
 .PHONY: vagrant-ssh
 vagrant-ssh: vagrant-check
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant ssh; true
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant ssh; true
 
 .PHONY: vagrant-halt
 vagrant-halt: vagrant-check
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant halt; true
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant halt; true
 
 .PHONY: vagrant-destroy
 vagrant-destroy: vagrant-check
 	@echo > .env
-	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} vagrant destroy; true
+	PREFIX=$$(basename $(PWD)) OS=${OS} VERSION=${VERSION} K8S=${K8S} RUNTIME=${RUNTIME} vagrant destroy; true
 
 .PHONY: clean
 clean:
