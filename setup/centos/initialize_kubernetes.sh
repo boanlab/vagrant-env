@@ -23,8 +23,6 @@ sudo mkdir -p /etc/kubernetes/pki/
 sudo chcon -R -t svirt_sandbox_file_t /var/lib/etcd
 sudo chcon -R -t svirt_sandbox_file_t /etc/kubernetes/
 
-exit 0
-
 # initialize the master node
 if [ "$CNI" == "calico" ]; then
     sudo kubeadm init --pod-network-cidr=192.168.0.0/16 | tee -a ~/k8s_init.log

@@ -22,8 +22,6 @@ sudo modprobe br_netfilter
 sudo bash -c "echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables"
 sudo bash -c "echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.conf"
 
-exit 0
-
 # initialize the master node
 if [ "$CNI" == "calico" ]; then
     sudo kubeadm init --pod-network-cidr=192.168.0.0/16 | tee -a ~/k8s_init.log
