@@ -1,6 +1,11 @@
 # vagrant-env
 
-- Commands
+- Virtualbox and Vagrant
+
+If your OS is Ubuntu, you can use 'setup/install-vagrant-with-vbox.sh' to install them.  
+However, if not, you need to install Virtualbox and Vagrant yourself.  
+
+- Commands (Linux only)
 
 ```
 make vagrant-up      = vagrant up
@@ -12,33 +17,30 @@ make vagrant-destroy = vagrant destroy
 make clean           = rm -f *.log
 ```
 
-- OS and Version
+- OS and Version (Linux only)
 
 ```
-make vagrant-up OS=ubuntu VERSION={bionic,focal,impish,jammy}
+make vagrant-up OS=ubuntu VERSION={bionic,focal,jammy}
 make vagrant-up OS=centos VERSION={8,9}
-make vagrant-up OS=rhel   VERSION={8,9}
 ```
+
+If you're on Windows OS, you need to modify Vagrantfile to choose specific options.  
+
+- Reference
 
 ```
 Ubuntu 18.04 = bionic
 Ubuntu 20.04 = focal
-Ubuntu 21.10 = impish
 Ubuntu 22.04 = jammy
 ```
 
-- Default values
-
 ```
 if OS=centos then
-  VERSION=8 by default
-
-else if OS=rhel then
-  VERSION=8 by default
+  VERSION=9 by default
 
 else if OS=ubuntu then
-  VERSION=bionic by default
+  VERSION=jammy by default
 
 else
-  OS=ubuntu VERSION=bionic by default
+  OS=ubuntu VERSION=jammy by default
 ```

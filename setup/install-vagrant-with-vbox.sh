@@ -4,6 +4,11 @@ NEED_TO_REBOOT=no
 
 . /etc/os-release
 
+if [ "$ID" != "ubuntu" ]; then
+    echo "Need to install virtualbox and vagrant by yourself"
+    exit
+fi
+
 if [ ! -x "$(command -v make)" ]; then
     sudo apt-get update
     sudo apt-get -y install build-essential
@@ -20,7 +25,7 @@ if [ ! -x "$(command -v vboxmanage)" ]; then
     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib"
     sudo apt-get update
-    sudo apt-get -y install virtualbox-6.1
+    sudo apt-get -y install virtualbox
 
     NEED_TO_REBOOT=yes
 fi

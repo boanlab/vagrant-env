@@ -7,30 +7,29 @@ OS_VERSION = ENV['VERSION'] || "focal"
 K8S        = ENV['K8S'] || "none"
 RUNTIME    = ENV['RUNTIME'] || "none"
 
+# disable the following lines if not linux
+# OS_NAME = "ubuntu"
+# OS_VERSION = "jammy"
+# K8S = "none"
+# RUNTIME = "none"
+
 if OS_NAME == "" then
   OS_NAME = "ubuntu"
-elsif OS_NAME != "ubuntu" && OS_NAME != "centos" && OS_NAME != "rhel" then
-  puts "Unkonwn OS_NAME: ENV['OS'] = { 'ubuntu' | 'centos' | 'rhel' }"
+elsif OS_NAME != "ubuntu" && OS_NAME != "centos" then
+  puts "Unkonwn OS_NAME: ENV['OS'] = { 'ubuntu' | 'centos' }"
   abort
 end
 
 if OS_NAME == "ubuntu" && OS_VERSION == "" then
-  OS_VERSION = "focal"
+  OS_VERSION = "jammy"
 elsif OS_NAME == "ubuntu" && (OS_VERSION != "bionic" && OS_VERSION != "focal" && OS_VERSION != "jammy") then
     puts "Unknown OS_VERSION: ENV['VERSION'] = { 'binoic' | 'focal' | 'jammy' }"
     abort
 end
 
 if OS_NAME == "centos" && OS_VERSION == "" then
-  OS_VERSION = "8"
+  OS_VERSION = "9"
 elsif OS_NAME == "centos" && (OS_VERSION != "8" && OS_VERSION != "9") then
-  puts "Unknown OS_VERSION: ENV['VERSION'] = { '8' | '9' }"
-  abort
-end
-
-if OS_NAME == "rhel" && OS_VERSION == "" then
-  OS_VERSION = "8"
-elsif OS_NAME == "rhel" && (OS_VERSION != "8" && OS_VERSION != "9") then
   puts "Unknown OS_VERSION: ENV['VERSION'] = { '8' | '9' }"
   abort
 end
@@ -60,14 +59,6 @@ if OS_NAME == "centos" then
   elsif OS_VERSION == "8" then
     VM_IMG = "generic/centos8s"
     VM_NAME = ENV_NAME + "-centos8s"
-  end
-elsif OS_NAME == "rhel" then
-  if OS_VERSION == "9" then
-    VM_IMG = "generic/rhel9"
-    VM_NAME = ENV_NAME + "-rhel9"
-  elsif OS_VERSION == "8" then
-    VM_IMG = "generic/rhel8"
-    VM_NAME = ENV_NAME + "-rhel8"
   end
 elsif OS_NAME == "ubuntu" then
   if OS_VERSION == "jammy" then
@@ -161,15 +152,6 @@ Vagrant.configure("2") do |config|
     config.vm.provision :shell, :inline => "/home/vagrant/setup/centos/enable_selinux.sh"
 
     # do something else
-
-  elsif OS_NAME == "rhel" then
-    if OS_VERSION == "9" then
-      config.vm.provision :shell, :inline => "sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"lsm=selinux,bpf\"/g' /etc/default/grub"
-      config.vm.provision :shell, :inline => "grub-mkconfig -o /boot/grub/grub.cfg"
-      config.vm.provision :reload
-    end
-
-    # do something
 
   else # ubuntu
     if OS_VERSION == "jammy" then
