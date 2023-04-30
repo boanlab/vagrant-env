@@ -2,8 +2,8 @@
 
 - Virtualbox and Vagrant
 
-If your OS is Ubuntu, you can use 'setup/install-vagrant-with-vbox.sh' to install them.  
-However, if not, you need to install Virtualbox and Vagrant yourself.  
+	- If your OS is Ubuntu, you can use 'setup/install-vagrant-with-vbox.sh' to install them.  
+	- If not, you need to install Virtualbox and Vagrant by yourself.  
 
 - Commands (Linux only)
 
@@ -24,7 +24,7 @@ make vagrant-up OS=ubuntu VERSION={bionic,focal,jammy}
 make vagrant-up OS=centos VERSION={8,9}
 ```
 
-If you're on Windows OS, you need to modify Vagrantfile to choose specific options.  
+	- If you're on Windows OS, you need to modify Vagrantfile to choose specific options.  
 
 - Reference
 
