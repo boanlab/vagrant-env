@@ -24,7 +24,7 @@
 	make vagrant-up OS=centos VERSION={8,9}
 	```
 
-	- If you're on Windows OS, you need to modify Vagrantfile to choose specific options.  
+	- If you're on Windows OS, you need to modify Vagrantfile to change specific options.  
 
 - Reference
 

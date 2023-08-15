@@ -1,6 +1,9 @@
 # vagrant files
 .vagrant
 
+# home directory
+home_dir/*
+
 # vagrant log
 *.log
 
