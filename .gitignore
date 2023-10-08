@@ -1,11 +1,26 @@
 # vagrant files
 .vagrant
+ubuntu-1804/.vagrant
+ubuntu-2004/.vagrant
+ubuntu-2204/.vagrant
+centos-8s/.vagrant
+centos-9s/.vagrant
 
-# home directory
-home_dir/*
+# working directory
+work/*
+ubuntu-1804/work/*
+ubuntu-2004/work/*
+ubuntu-2204/work/*
+centos-8s/work/*
+centos-9s/work/*
 
 # vagrant log
 *.log
+ubuntu-1804/*.log
+ubuntu-2004/*.log
+ubuntu-2204/*.log
+centos-8s/*.log
+centos-9s/*.log
 
 # env
 .env
