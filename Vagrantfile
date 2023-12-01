@@ -94,12 +94,16 @@ Vagrant.configure("2") do |config|
   config.vagrant.plugins = ["vagrant-vbguest", "vagrant-reload"]
 
   config.vm.define VM_NAME do |cfg|
-    cfg.vm.box = VM_IMG
+    cfg.vm.box = IMG_NAME
+
     cfg.vm.provider "virtualbox" do |vb|
-      vb.name = VM_NAME
       vb.memory = SIZE_OF_VMEM
       vb.cpus = NUM_OF_VCPUS
-      vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
+    end
+
+    cfg.vm.provider "libvirt" do |vb|
+      vb.memory = SIZE_OF_VMEM
+      vb.cpus = NUM_OF_VCPUS
     end
   end
 
