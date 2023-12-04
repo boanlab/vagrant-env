@@ -1,7 +1,7 @@
 Vagrant.require_version ">= 2.0.0"
 
-VM_NAME = "centos-8-stream"
-IMG_NAME = "generic/centos8s"
+VM_NAME = "ubuntu-jammy"
+IMG_NAME = "generic/ubuntu2204"
 
 NUM_OF_VCPUS = 4
 SIZE_OF_VMEM = 4096
