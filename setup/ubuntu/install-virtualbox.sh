@@ -8,4 +8,4 @@ wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --d
 
 # install vbox
 sudo apt-get update
-sudo apt-get install virtualbox-6.1
+sudo apt-get install virtualbox
