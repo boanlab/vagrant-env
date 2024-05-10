@@ -45,22 +45,22 @@ puts "OS_NAME: " + OS_NAME + ", OS_VERSION: " + OS_VERSION
 # set the specific Ubuntu image and VM name
 if OS_NAME == "ubuntu" then
   if OS_VERSION == "22.04" then
-    VM_IMG = "generic/ubuntu2204"
     VM_NAME = ENV_NAME + "-ubuntu2204"
+    IMG_NAME = "generic/ubuntu2204"
   elsif OS_VERSION == "20.04" then
-    VM_IMG = "generic/ubuntu2004"
     VM_NAME = ENV_NAME + "-ubuntu2004"
+    IMG_NAME = "generic/ubuntu2004"
   elsif OS_VERSION == "18.04" then
-    VM_IMG = "generic/ubuntu1804"
     VM_NAME = ENV_NAME + "-ubuntu1804"
+    IMG_NAME = "generic/ubuntu1804"
   end
 elsif OS_NAME == "centos" then
   if OS_VERSION == "9" then
-    VM_IMG = "generic/centos9s"
     VM_NAME = ENV_NAME + "-centos9s"
+    IMG_NAME = "generic/centos9s"
   elsif OS_VERSION == "8" then
-    VM_IMG = "generic/centos8s"
     VM_NAME = ENV_NAME + "-centos8s"
+    IMG_NAME = "generic/centos8s"
   end
 end
 
